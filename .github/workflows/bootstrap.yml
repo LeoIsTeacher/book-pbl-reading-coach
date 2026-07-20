@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - book-pbl-reading-coach.zip
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,9 +17,9 @@ jobs:
       - name: Unpack and validate
         run: |
           unzip -o book-pbl-reading-coach.zip
-          rm book-pbl-reading-coach.zip
-          rm .github/workflows/bootstrap.yml
           python tests/validate_repository.py
+          rm book-pbl-reading-coach.zip
+          rm .github/workflows/validate-skill.yml
       - name: Commit initialized repository
         run: |
           git config user.name "github-actions[bot]"
