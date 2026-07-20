@@ -1,0 +1,8 @@
+{
+  "project_parent_page_id": "REPLACE_WITH_NOTION_PAGE_ID",
+  "book_page_title": "《书名》教练式PBL共读项目",
+  "task_parent": "book_page",
+  "publish_only_after_approval": true,
+  "task_title_pattern": "任务{index}：{title}",
+  "secret_source": "environment_variable"
+}

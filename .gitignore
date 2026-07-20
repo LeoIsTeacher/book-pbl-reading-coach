@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+*.epub
+*.pdf
+*.mobi
+*.azw*
+*.key
+*.pem
+secrets/
+private/
+notion-config.json
+__pycache__/
+*.pyc
