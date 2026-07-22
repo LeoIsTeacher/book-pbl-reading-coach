@@ -4,8 +4,8 @@
 
 ## Skills
 
-- `.agents/skills/book-pbl-reading-coach/`：创建书籍分析、任务地图、公开任务与隐藏批改标准。
-- `.agents/skills/assignment-feedback-coach/`：根据指定书籍、任务与批改标准生成教练式反馈，并在确认发送后更新成长档案。
+- `.agents/skills/book-pbl-reading-coach/`：创建书籍分析、任务地图、任务0、公开任务与隐藏批改标准，并在拆书时同步保存。
+- `.agents/skills/assignment-feedback-coach/`：根据指定书籍、任务、隐藏批改标准和成员姓名生成教练式反馈，并在确认发送后更新成长档案。
 
 ## 书籍包
 
@@ -21,11 +21,11 @@ books/<book_id>/
     └── task-<task_id>.md
 ```
 
-`book.yaml` 记录书名、版本和已确认任务编号。任务设计 Skill 写入已确认的任务与批改标准；反馈 Skill 只读取当前 `book_id` 与 `task_id` 对应的文件，不混用其他书籍或版本的材料。`books/_template/` 提供新书的起始目录。
+`book.yaml` 记录书名、任务编号和书籍包状态，不要求出版社、出版年份、译者或其他版本元数据。任务设计 Skill 写入已确认的任务与批改标准；反馈 Skill 只读取当前 `book_id` 与 `task_id` 对应的文件，不混用其他书籍或版本的材料。`books/_template/` 提供新书的起始目录。
 
 ## 当前书籍包
 
-- `books/rich-dad-poor-dad/`：`display_title` 为《富爸爸穷爸爸》，保留任务地图与任务0至任务8的批改标准。具体版本信息需在实际发布前填写并核对。
+- `books/rich-dad-poor-dad/`：`display_title` 为《富爸爸穷爸爸》，包含任务地图、任务0至任务8的公开任务和隐藏批改标准。
 
 ## 安全边界
 
