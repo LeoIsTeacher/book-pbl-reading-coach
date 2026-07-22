@@ -1,21 +1,32 @@
 # Book PBL Reading Coach
 
-把一本书转化为可直接使用的教练式 PBL 共读项目。仓库保存方法、提示词、模板、质量检查与经过批准的示例；原书文件、访问令牌和个人隐私数据不进入仓库。
+这个仓库包含两个可复用的项目级 Skill：一个负责把书籍转化为教练式 PBL 共读项目，另一个依据已确认的任务与批改标准反馈学员作业。原书文件、访问令牌和个人隐私数据不进入仓库。
 
-## 工作方式
+## Skills
 
-先核对版本和目录，生成全书任务地图与章节覆盖表；再按“任务0、任务1……”逐个写作和审核。每个任务都围绕一个现实问题展开，提供完整案例、明确阅读范围、分析或批判任务、社群提交方式与 AI 反馈标准。任务通过后才发布到 Notion，最后用综合任务形成可复用的个人方法。
+- `.agents/skills/book-pbl-reading-coach/`：创建书籍分析、任务地图、公开任务与隐藏批改标准。
+- `.agents/skills/assignment-feedback-coach/`：根据指定书籍、任务与批改标准生成教练式反馈，并在确认发送后更新成长档案。
 
-## 目录
+## 书籍包
 
-- `SKILL.md`：技能入口与强制流程。
-- `config/`：默认写作规则与 Notion 字段示例。
-- `prompts/`：书籍分析、任务地图、任务生成和质量复核提示词。
-- `templates/`：项目页、任务页和反馈报告模板。
-- `examples/rich-dad-poor-dad/`：已验证的任务地图与写作样例。
-- `tests/`：章节覆盖、文风清单和自动验证脚本。
-- `.github/workflows/`：持续集成检查。
+每本书使用一个稳定的 ASCII `book_id`，读者界面继续使用中文或其他语言的 `display_title`：
+
+```text
+books/<book_id>/
+├── book.yaml
+├── task-map.md
+├── tasks/
+│   └── task-<task_id>.md
+└── rubrics/
+    └── task-<task_id>.md
+```
+
+`book.yaml` 记录书名、版本和已确认任务编号。任务设计 Skill 写入已确认的任务与批改标准；反馈 Skill 只读取当前 `book_id` 与 `task_id` 对应的文件，不混用其他书籍或版本的材料。`books/_template/` 提供新书的起始目录。
+
+## 当前书籍包
+
+- `books/rich-dad-poor-dad/`：`display_title` 为《富爸爸穷爸爸》，保留任务地图与任务0至任务8的批改标准。具体版本信息需在实际发布前填写并核对。
 
 ## 安全边界
 
-不要提交 EPUB、PDF、扫描件、长篇原文、`.env`、Notion Token、API Key 或真实财务数据。使用本地资料源完成分析，只把章节映射、原创学习单和必要的来源说明提交到仓库。
+不要提交 EPUB、PDF、扫描件、长篇原文、`.env`、Notion Token、API Key 或真实财务数据。成长档案存放在受控的私有工作区，不进入这个仓库。

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Book PBL Reading Coach"
-  short_description: "Turn books into coached PBL reading projects"
-  default_prompt: "Use -pbl-reading-coach to turn this book into a chapter-covered PBL reading project."
