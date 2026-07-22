@@ -1,0 +1,5 @@
+interface:
+  display_name: "教练式共读作业反馈"
+  short_description: "依据任务批改指南生成教练式反馈，并持续追踪成员成长变化"
+  default_prompt: "Use $assignment-feedback-coach to review this PBL reading assignment and prepare a concise coaching response."
+
