@@ -1,47 +1,35 @@
 ---
 name: book-pbl-reading-coach
-description: Turn a book into a reusable coached, problem-based learning project with an approved task map, public learning tasks, and hidden grading rubrics. Use when Codex needs to design or revise a book club, guided reading worksheet, PBL learning sheet, chapter-based self-study project, or reusable reading-coach workflow.
+description: 将一本书拆解为可审核的教练式 PBL 共读任务，并同步生成任务0、任务地图、公开任务和隐藏批改指南。
 ---
 
-# Book PBL Reading Coach
+# 教练式自学习项目设计 Skill
 
-Create reader-ready learning sheets and a reusable book package. Keep the book as the bounded knowledge source while training readers to analyze, criticize, redesign, persuade, and act.
+## 强制输出
 
-## Required inputs
+拆解新书时，必须先生成并审核任务地图，再逐个生成任务。每个任务同时保存两份文件：给成员阅读的公开任务，以及只供主理人和批改 Skill 使用的隐藏批改指南。任务0不能被当作普通章节任务跳过，必须包含阅读背景、学习期待、明确阅读范围和基线问题。
 
-Obtain a lowercase ASCII `book_id`, the display title, the exact edition, a book file or reliable table of contents, target readers, learning purpose, desired difficulty, delivery platform, and privacy or community rules. Never infer chapter numbering from memory. Do not copy substantial copyrighted text; cite chapter ranges and paraphrase ideas.
-
-## Book package contract
-
-Store approved material under `PROJECT_ROOT/books/<book_id>/`:
+文件结构固定为：
 
 ```text
-book.yaml
-task-map.md
-tasks/task-<task_id>.md
-rubrics/task-<task_id>.md
+books/<book_id>/
+├─ book.yaml
+├─ task-map.md
+├─ tasks/task-0.md
+├─ tasks/task-<n>.md
+├─ rubrics/task-0.md
+└─ rubrics/task-<n>.md
 ```
 
-`book.yaml` must contain `book_id`, `display_title`, `edition`, and the approved task IDs. Use the ASCII `book_id` in paths and commands; use `display_title` in reader-facing text. A task and its rubric must share the same `task_id`. Keep learner profiles outside this package and outside version control when they contain personal data.
+书籍包不要求收集出版社、出版年份、译者或其他版本信息。任务正文中的阅读范围必须明确写出第几章至第几章，章节名称以项目已经审核的书籍材料为准。书籍包至少记录书名和 book_id，不能因缺少版本元数据而阻塞任务设计。
 
-## Workflow
+## 任务0来源规则
 
-1. Read `prompts/book-analysis.md` and analyze the author, period, intended problem, argument, limits, and chapter structure.
-2. Read `prompts/task-map.md` and create a complete task map before drafting any task. Include Task 0 for background and expectations, then cover every assigned chapter exactly once unless a deliberate review is marked.
-3. Present the map, edition, and task IDs for approval. Do not publish tasks or rubrics before the reading ranges are verified.
-4. Read `prompts/task-generation.md` and draft one public task and its hidden rubric at a time. Keep both as drafts until explicit approval such as `pass`.
-5. Read `prompts/quality-review.md` and revise failures before marking the task and rubric approved.
-6. Write approved files to the book package. Publish a task to the configured destination only after approval; create one book project page and sequential task subpages when that destination is available.
-7. End the book with a synthesis task that turns the earlier judgments into a reusable method or action system.
+如果当前项目已有经主理人确认的产品讨论、任务说明或历史版本，应从其中提取最新任务0，不凭空另写。当前《富爸爸穷爸爸》任务0的已确认方向是：阅读序言“这就是你所需要的”，理解作者写作背景与本次学习目标，并回答四个基线问题：财富主要来自什么；目前最信任哪一种财富积累方式及原因；个人财务或投资上最想解决的一个问题；完成学习后希望自己的判断发生什么变化。
 
-## Non-negotiable writing rules
+未来每次拆解书籍时，都必须把任务0正文与任务0隐藏批改指南一并写入书籍包，并在任务地图中登记其阅读范围、目标和输出。公开任务发生修改时，必须同步修改对应隐藏指南；任一文件未通过审核，不能标记任务完成。
 
-Write in natural, complete paragraphs, normally 200–500 Chinese characters per paragraph when the output language is Chinese. Use few headings and avoid one-sentence paragraphs, dense question lists, repetitive transitions, underscores, and AI-outline style. Each task must contain a realistic PBL story with a person, numbers, constraints, trade-offs, and an unresolved decision. The reader must use the assigned chapters to critique, analyze, rewrite, persuade, or design a solution; summary alone is insufficient.
+## 质量检查
 
-State the exact chapter range and chapter titles for the edition in use. Provide background facts and period context when beginners cannot reasonably research them, then ask readers to judge transferability and limitations. Mark invented cases as fictional but plausible. For personal finance or other sensitive topics, use a 100-unit model and remind readers not to disclose real private data.
+生成任务后检查：阅读范围是否明确、任务是否真正围绕问题而非章节摘要、案例是否包含现实限制、读者是否需要分析或修正而不是抄写、最终成果是否可提交、任务之间是否递进、任务0是否建立了可供最后任务比较的基线。通过后才允许交给批改 Skill 使用。
 
-Close each task with the problem-solving capability gained, the submission path to the community host or GET Brain, the joint host-and-AI feedback criteria, and the role of anonymized peer discussion. Praise valuable reasoning before escalating challenge. Do not upload original books, copyrighted scans, credentials, API keys, or personal financial data.
-
-## Resources
-
-Use `config/default-rules.md` for defaults and `config/notion-config.example.json` only as a field map. Use `templates/` for book, task, and feedback structures. Use the rich-dad-poor-dad files under `PROJECT_ROOT/books/` as a style reference rather than a source to copy mechanically.
